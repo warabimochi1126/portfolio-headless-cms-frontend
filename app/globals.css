@@ -2,3 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+.required {
+  position: relative;
+}
+
+.required::after {
+  content: "必須";
+  background-color: #f0ad4e;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  min-width: 10px;
+  padding: 3px 7px;
+  margin: 0px 5px;
+  line-height: 1;
+  white-space: nowrap;
+  text-align: center;
+  border-radius: 10px;
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: -50px; /* 必要に応じて調整 */
+}

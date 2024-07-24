@@ -1,6 +1,6 @@
 import { FcHome } from "react-icons/fc";
 import { ImAccessibility } from "react-icons/im";
-import { SharedHeaderItem } from "./SharedHeaderItem";
+import { SharedHeaderItem } from "../layouts/SharedHeaderItem";
 
 export function ProductsHeader() {
     return (

@@ -20,23 +20,7 @@ import { InputOverView } from "./InputOverView";
 import { InputMainTechnology } from "./InputMainTechnology";
 import { InputProductLink } from "./InputProductLink";
 import { FormProvider, useForm } from "react-hook-form";
-
-const modalStyle = {
-  overlay: {
-    top: 0,
-    left: 0,
-    backgroundColor: "rgba(0,0,0,0.85)",
-  },
-  content: {
-    top: "10rem",
-    left: "10rem",
-    right: "10rem",
-    bottom: "10rem",
-    backgroundColor: "white",
-    borderRadius: "1rem",
-    padding: "1rem",
-  },
-};
+import { modalStyle } from "@/styles/modalStyle";
 
 Modal.setAppElement(".App");
 
@@ -49,7 +33,6 @@ export function ProductCard({
   overViewStrArray,
   mainTechStrArray,
   subTechStrArray,
-  children,
 }: ProductCardProps) {
   const [modalIsOpen, setIsOpen] = useState(false);
   const methods = useForm({

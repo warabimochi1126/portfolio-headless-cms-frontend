@@ -9,5 +9,4 @@ export interface ProductCardProps {
   overViewStrArray: string[];
   mainTechStrArray: string[];
   subTechStrArray?: string[];
-  children: React.ReactNode;
 }

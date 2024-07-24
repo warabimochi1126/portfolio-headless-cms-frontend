@@ -1,5 +1,6 @@
 import { DetailImageIcon } from "@/components/elements/DetailImageIcon";
 import DetailReactIcon from "@/components/elements/DetailReactIcon";
+import { NewProductCard } from "@/components/elements/NewProductCard";
 import { ProductCard } from "@/components/elements/ProductCard";
 import { ProductsHeader } from "@/components/elements/ProductsHeader";
 import { ProductsHeaderStr } from "@/components/layouts/ProductsHeaderStr";
@@ -29,17 +30,16 @@ export default function Home() {
             mainTechStrArray={["Next.js(App Router)", "Supabase"]}
             subTechStrArray={["TypeScript", "TailwindCSS"]}
           >
-            <DetailImageIcon
+            {/* <DetailImageIcon
               url="https://qiita.com/warabimochi_26/items/0c86ea1e6dfb84fb1c4a"
               icon={QiitaIcon}
             />
             <DetailReactIcon
               url="https://github.com/warabimochi1126/EnvHub"
               Icon={FaGithubSquare}
-            />
+            /> */}
           </ProductCard>
-
-          <Image src="/envhub.png" alt="test" width={300} height={300} />
+          <NewProductCard />
         </div>
       </div>
     </>

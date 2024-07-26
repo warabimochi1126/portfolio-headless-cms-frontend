@@ -21,6 +21,8 @@ import { InputMainTechnology } from "./InputMainTechnology";
 import { InputProductLink } from "./InputProductLink";
 import { FormProvider, useForm } from "react-hook-form";
 import { modalStyle } from "@/styles/modalStyle";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { inputValidationSchema } from "@/utils/lib/validationRules";
 
 Modal.setAppElement(".App");
 
@@ -36,6 +38,7 @@ export function ProductCard({
 }: ProductCardProps) {
   const [modalIsOpen, setIsOpen] = useState(false);
   const methods = useForm({
+    resolver: zodResolver(inputValidationSchema),
     defaultValues: {
       imageSrcPath: imageData,
       deployUrl: deployUrl,

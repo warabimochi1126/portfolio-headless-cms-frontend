@@ -1,11 +1,22 @@
+import { useFormContext } from "react-hook-form";
 import { InputField } from "./InputField";
+import { ErrorField } from "./ErrorField";
 
 export function InputMainTechnology() {
+  const {
+    formState: { errors },
+  } = useFormContext();
+
+  console.log(errors);
+
   return (
     <div className="space-y-1">
       <label htmlFor="technology" className="font-bold text-xl required">
         主な使用技術
       </label>
+      {errors.mainTechnology && (
+        <ErrorField errorMsg={errors.mainTechnology?.message as string} />
+      )}
       <div className="space-y-2">
         <InputField
           type="text"

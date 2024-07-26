@@ -13,10 +13,13 @@ import { InputMainTechnology } from "./InputMainTechnology";
 import { InputProductLink } from "./InputProductLink";
 import fileIcon from "@/public/fileIcon.svg";
 import Image from "next/image";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { inputValidationSchema } from "@/utils/lib/validationRules";
 
 export function NewProductCard() {
   const [modalIsOpen, setIsOpen] = useState(false);
   const methods = useForm({
+    resolver: zodResolver(inputValidationSchema),
     defaultValues: {
       imageSrcPath: "",
       deployUrl: "",
@@ -44,7 +47,7 @@ export function NewProductCard() {
             className="w-16 h-16 text-gray-500 mb-4"
           />
           <p className="text-sm font-medium text-gray-700 text-center px-2">
-            新しく成果物を登録する
+            新しい作品を登録する
           </p>
         </div>
       </motion.div>

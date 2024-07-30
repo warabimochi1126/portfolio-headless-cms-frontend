@@ -38,7 +38,7 @@ export function NewProductCard() {
     const formData = new FormData();
     formData.append("imageFIleData", data.imageFileData);
 
-    const response = await fetch("http://localhost:3001/products", {
+    const response = await fetch("http://localhost:3000/api/products", {
       method: "POST",
       body: formData
     });

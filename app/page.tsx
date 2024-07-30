@@ -9,7 +9,9 @@ import QiitaIcon from "@/public/qiita-icon.png";
 import Image from "next/image";
 import { FaGithubSquare } from "react-icons/fa";
 
-export default function Home() {
+export default async function Home() {
+  const response = await fetch(process.env.API_URL!)
+
   return (
     <>
       <ProductsHeader />

@@ -25,6 +25,7 @@ export function ImageDragAndDropZone() {
     // 本来はサーバ側に処理を投げて、画像保存 + パスをDBに保存
     const imageUrl = URL.createObjectURL(droppedImage);
     setValue("imageSrcPath", imageUrl);
+    setValue("imageFileData", droppedImage);
   };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });

@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 
 export async function POST(req: Request, res: Response) {
@@ -5,6 +6,8 @@ export async function POST(req: Request, res: Response) {
     const imageFileData = formData.get("imageFIleData") as File;
     const imageFileDataArrayBuffer = await imageFileData.arrayBuffer();
     const imageFileDataBuffer = Buffer.from(imageFileDataArrayBuffer);
+    
+    const uuid = uuidv4();
 
     // R2アップロードロジック
     const s3 = new S3Client({
@@ -15,13 +18,48 @@ export async function POST(req: Request, res: Response) {
             secretAccessKey: process.env.R2_SECRET_KEY!
         }
     });
-    const response = await s3.send(new PutObjectCommand({
+
+    await s3.send(new PutObjectCommand({
         Bucket: "portfolio-images",
-        Key: "test",    // keyに対してポートフォリオのID入れて管理しておく？
+        Key: uuid,
         ContentType: imageFileData.type,
         Body: imageFileDataBuffer,
     }));
 
+    const imageSrcPath = `${process.env.R2_STORAGE_URL}/${uuid}`
+    const deployUrl = formData.get("deployUrl")?.toString().replaceAll(" ", "");
+    const productName = formData.get("productName")?.toString().replaceAll(" ", "");
+    const overview = formData.get("overview")?.toString().replaceAll(" ", "");
+    const mainTechnology = formData.get("mainTechnology")?.toString().replaceAll(" ", "");
+    const subTechnology = formData.get("subTechnology")?.toString().replaceAll(" ", "");
+    const productLinks = formData.get("productLinks")?.toString().replaceAll(" ", "").split(",").filter(str => str !== "");
+
+    // バックエンドに投げてDB保存
+    const response = await fetch(`${process.env.API_URL!}/products`, {
+        method: "POST",
+        body: JSON.stringify({
+            imageSrcPath,
+            deployUrl,
+            productName,
+            overview,
+            mainTechnology,
+            subTechnology,
+            productLinks,
+        })
+    });
+
+    const responseJson = await response.json();
+    console.log(responseJson);
+
+    console.log(JSON.stringify({
+        imageSrcPath,
+        deployUrl,
+        productName,
+        overview,
+        mainTechnology,
+        subTechnology,
+        productLinks,
+    }));
 
     return Response.json({
         "message": "アップロードに成功しました。"

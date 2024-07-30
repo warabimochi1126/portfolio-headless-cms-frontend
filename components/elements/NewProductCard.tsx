@@ -33,12 +33,16 @@ export function NewProductCard() {
   });
 
   const onSubmit = async (data: any) => {
-    console.log(data);
-
     const formData = new FormData();
     formData.append("imageFIleData", data.imageFileData);
+    formData.append("deployUrl", data.deployUrl);
+    formData.append("productName", data.productName);
+    formData.append("overview", data.overview);
+    formData.append("mainTechnology", data.mainTechnology);
+    formData.append("subTechnology", data.subTechnology);
+    formData.append("productLinks", data.productLinks);
 
-    const response = await fetch("http://localhost:3000/api/products", {
+    const response = await fetch("/api/products", {
       method: "POST",
       body: formData
     });

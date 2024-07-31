@@ -26,7 +26,7 @@ export async function POST(req: Request, res: Response) {
         Body: imageFileDataBuffer,
     }));
 
-    const imageSrcPath = `${process.env.R2_STORAGE_URL}/${uuid}`
+    const imageSrcPath = `${process.env.R2_STORAGE_URL}/${uuid}`;
     const deployUrl = formData.get("deployUrl")?.toString().replaceAll(" ", "");
     const productName = formData.get("productName")?.toString().replaceAll(" ", "");
     const overview = formData.get("overview")?.toString().replaceAll(" ", "");
@@ -45,21 +45,11 @@ export async function POST(req: Request, res: Response) {
             mainTechnology,
             subTechnology,
             productLinks,
-        })
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        },
     });
-
-    const responseJson = await response.json();
-    console.log(responseJson);
-
-    console.log(JSON.stringify({
-        imageSrcPath,
-        deployUrl,
-        productName,
-        overview,
-        mainTechnology,
-        subTechnology,
-        productLinks,
-    }));
 
     return Response.json({
         "message": "アップロードに成功しました。"

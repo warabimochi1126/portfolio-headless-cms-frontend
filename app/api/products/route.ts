@@ -4,29 +4,38 @@ import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 export async function POST(req: Request, res: Response) {
     const formData = await req.formData();
     const imageFileData = formData.get("imageFIleData") as File;
-    const imageFileDataArrayBuffer = await imageFileData.arrayBuffer();
-    const imageFileDataBuffer = Buffer.from(imageFileDataArrayBuffer);
+
+    console.log("-------------------------");
+    console.log(imageFileData);
+    console.log("-------------------------");
+
+    let imageSrcPath = "";
+    if (imageFileData) {
+        const imageFileDataArrayBuffer = await imageFileData.arrayBuffer();
+        const imageFileDataBuffer = Buffer.from(imageFileDataArrayBuffer);
+        
+        const uuid = uuidv4();
+        imageSrcPath = `${process.env.R2_STORAGE_URL}/${uuid}`;
     
-    const uuid = uuidv4();
+        // R2アップロードロジック
+        const s3 = new S3Client({
+            region: "auto",
+            endpoint: process.env.R2_ENDPOINT!,
+            credentials: {
+                accessKeyId: process.env.R2_ACCESS_KEY!,
+                secretAccessKey: process.env.R2_SECRET_KEY!
+            }
+        });
+    
+        await s3.send(new PutObjectCommand({
+            Bucket: "portfolio-images",
+            Key: uuid,
+            ContentType: imageFileData.type,
+            Body: imageFileDataBuffer,
+        }));
 
-    // R2アップロードロジック
-    const s3 = new S3Client({
-        region: "auto",
-        endpoint: process.env.R2_ENDPOINT!,
-        credentials: {
-            accessKeyId: process.env.R2_ACCESS_KEY!,
-            secretAccessKey: process.env.R2_SECRET_KEY!
-        }
-    });
+    }
 
-    await s3.send(new PutObjectCommand({
-        Bucket: "portfolio-images",
-        Key: uuid,
-        ContentType: imageFileData.type,
-        Body: imageFileDataBuffer,
-    }));
-
-    const imageSrcPath = `${process.env.R2_STORAGE_URL}/${uuid}`;
     const deployUrl = formData.get("deployUrl")?.toString().replaceAll(" ", "");
     const productName = formData.get("productName")?.toString().replaceAll(" ", "");
     const overview = formData.get("overview")?.toString().replaceAll(" ", "");

@@ -9,4 +9,5 @@ export interface ProductCardProps {
   overViewStrArray: string[];
   mainTechStrArray: string[];
   subTechStrArray?: string[];
+  productLinks?: string[];
 }

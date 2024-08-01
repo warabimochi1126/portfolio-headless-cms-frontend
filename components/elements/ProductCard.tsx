@@ -35,6 +35,7 @@ export function ProductCard({
   overViewStrArray,
   mainTechStrArray,
   subTechStrArray,
+  productLinks
 }: ProductCardProps) {
   const [modalIsOpen, setIsOpen] = useState(false);
   const methods = useForm({
@@ -46,10 +47,7 @@ export function ProductCard({
       overview: overViewStrArray,
       mainTechnology: mainTechStrArray,
       subTechnology: subTechStrArray,
-      productLinks: [
-        "https://qiita.com/warabimochi_26/items/0c86ea1e6dfb84fb1c4a",
-        "https://github.com/warabimochi1126/EnvHub",
-      ],
+      productLinks: productLinks,
     },
   });
 

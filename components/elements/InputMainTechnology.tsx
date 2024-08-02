@@ -27,7 +27,7 @@ export function InputMainTechnology() {
         <InputField
           type="text"
           id="technology"
-          placeholder="サブ技術:スペースで区切ると他の技術スタックとして認識されます。"
+          placeholder="サブ技術:カンマで区切ると他の技術スタックとして認識されます。"
           registerName="subTechnology"
         />
       </div>

@@ -41,9 +41,8 @@ export function ProductCard({
 }: ProductCardProps) {
   const [modalIsOpen, setIsOpen] = useState(false);
   const methods = useForm({
-    resolver: zodResolver(inputValidationSchema),
+    // resolver: zodResolver(inputValidationSchema),
     defaultValues: {
-      id,
       r2uuid,
       imageSrcPath: imageData,
       imageFileData: "",
@@ -52,7 +51,7 @@ export function ProductCard({
       overview: overViewStrArray.toString(),
       mainTechnology: mainTechStrArray.toString(),
       subTechnology: subTechStrArray?.toString(),
-      productLinks: productLinks,
+      productLinks: productLinks?.toString(),
     },
   });
 
@@ -61,14 +60,15 @@ export function ProductCard({
 
     console.log(data);
 
-    formData.append("id", data.id);
-    formData.append("r2uuid", data.r2uuid);
-    formData.append("imageFIleData", data.imageFileData);
-    formData.append("deployUrl", data.deployUrl);
+
+    formData.append("id", id.toString());
+    formData.append("r2uuid", r2uuid);
+    formData.append("imageFIleData", data.imageFileData ? data.imageFIleData : "");
+    formData.append("deployUrl", data.deployUrl ? data.imageFIleData : "");
     formData.append("productName", data.productName);
     formData.append("overview", data.overview);
     formData.append("mainTechnology", data.mainTechnology);
-    formData.append("subTechnology", data.subTechnology);
+    formData.append("subTechnology", data.subTechnology ? data.subTechnology : "");
     formData.append("productLinks", data.productLinks);
 
     const response = await fetch("/api/products", {

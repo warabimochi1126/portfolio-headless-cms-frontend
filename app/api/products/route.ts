@@ -5,8 +5,6 @@ export async function POST(req: Request, res: Response) {
     const formData = await req.formData();
     const imageFileData = formData.get("imageFIleData") as File;
 
-    // console.log(imageFileData.charAt(1));
-    console.log(Boolean(imageFileData));
     let imageSrcPath = "";
     if (imageFileData) {
         const imageFileDataArrayBuffer = await imageFileData.arrayBuffer();
@@ -31,7 +29,6 @@ export async function POST(req: Request, res: Response) {
             ContentType: imageFileData.type,
             Body: imageFileDataBuffer,
         }));
-
     }
 
     const deployUrl = formData.get("deployUrl")?.toString().replaceAll(" ", "");
@@ -65,6 +62,7 @@ export async function POST(req: Request, res: Response) {
 
 export async function PUT(req: Request, res: Response) {
     const formData = await req.formData();
+
     const id = Number(formData.get("id"));
     let r2uuid = formData.get("r2uuid") as string;
     const imageFileData = formData.get("imageFIleData") as File;
@@ -73,9 +71,9 @@ export async function PUT(req: Request, res: Response) {
     const overview = formData.get("overview");
     const mainTechnology = formData.get("mainTechnology");
     const subTechnology = formData.get("subTechnology");
-    const productLinks = formData.get("productLinks")?.toString().split(",");
+    const productLinks = formData.get("productLinks")?.toString().split(",").filter(str => str != "");
 
-
+    console.log(subTechnology);
     // 画像が無い -> ある : r2uuidがないが、imageFileDataは存在する
     // 画像を変更する : r2uuidがある、imageFileDataが存在する
     // 画像を変更しない : r2uuidがあるが、imageFileDataが存在しない

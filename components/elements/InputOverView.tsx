@@ -19,7 +19,7 @@ export function InputOverView() {
       <InputField
         type="text"
         id="overview"
-        placeholder="スペースで区切ると改行して表示されます。"
+        placeholder="カンマで区切ると改行して表示されます。"
         registerName="overview"
       />
     </div>

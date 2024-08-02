@@ -27,6 +27,8 @@ import { inputValidationSchema } from "@/utils/lib/validationRules";
 Modal.setAppElement(".App");
 
 export function ProductCard({
+  id,
+  r2uuid,
   imageData,
   altStr,
   title,
@@ -39,19 +41,41 @@ export function ProductCard({
 }: ProductCardProps) {
   const [modalIsOpen, setIsOpen] = useState(false);
   const methods = useForm({
-    resolver: zodResolver(inputValidationSchema),
+    // resolver: zodResolver(inputValidationSchema),
     defaultValues: {
+      id,
+      r2uuid,
       imageSrcPath: imageData,
+      imageFileData: "",
       deployUrl: deployUrl,
       productName: title,
-      overview: overViewStrArray,
-      mainTechnology: mainTechStrArray,
-      subTechnology: subTechStrArray,
+      overview: overViewStrArray.toString(),
+      mainTechnology: mainTechStrArray.toString(),
+      subTechnology: subTechStrArray?.toString(),
       productLinks: productLinks,
     },
   });
 
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit = async (data: any) => {  
+    const formData = new FormData();
+
+    console.log(data);
+
+    formData.append("id", data.id);
+    formData.append("r2uuid", data.r2uuid);
+    formData.append("imageFIleData", data.imageFileData);
+    formData.append("deployUrl", data.deployUrl);
+    formData.append("productName", data.productName);
+    formData.append("overview", data.overview);
+    formData.append("mainTechnology", data.mainTechnology);
+    formData.append("subTechnology", data.subTechnology);
+    formData.append("productLinks", data.productLinks);
+
+    const response = await fetch("/api/products", {
+      method: "PUT",
+      body: formData
+    })
+  } 
 
   return (
     <div className="App">

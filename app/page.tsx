@@ -26,8 +26,6 @@ export default async function Home() {
   })
   const productsData: productData[] = await response.json();
 
-  console.log(productsData);
-
   return (
     <>
       <ProductsHeader />
@@ -36,6 +34,8 @@ export default async function Home() {
         <ProductsHeaderStr />
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8">
           <ProductCard
+            id={321312321321}
+            r2uuid="23131321"
             imageData="/envhub.png"
             altStr="EnvHubのサムネイル画像"
             title="EnvHub"
@@ -54,6 +54,8 @@ export default async function Home() {
           { productsData.map((productData, index) => (       
             <ProductCard
               key={index}
+              id={productData.id}
+              r2uuid={productData.imageSrcPath ? new URL(productData.imageSrcPath).pathname.substring(1) : ""}
               imageData={productData.imageSrcPath ? productData.imageSrcPath : "/noimage.jpg"}
               altStr="サムネイル画像"
               title={productData.productName}

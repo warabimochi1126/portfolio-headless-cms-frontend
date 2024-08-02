@@ -8,6 +8,8 @@ import EnvHubImage from "@/public/envhub.png";
 import QiitaIcon from "@/public/qiita-icon.png";
 import Image from "next/image";
 import { FaGithubSquare } from "react-icons/fa";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface productData {
   id: number;
@@ -30,6 +32,7 @@ export default async function Home() {
 
   return (
     <>
+      <ToastContainer />
       <ProductsHeader />
 
       <div className="mx-auto max-w-3xl mt-10 mb-20">

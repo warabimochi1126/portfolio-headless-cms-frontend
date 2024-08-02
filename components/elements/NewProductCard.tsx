@@ -33,6 +33,8 @@ export function NewProductCard() {
   });
 
   const onSubmit = async (data: any) => {
+    console.log(data);
+
     const formData = new FormData();
     formData.append("imageFIleData", data.imageFileData);
     formData.append("deployUrl", data.deployUrl);

@@ -3,9 +3,8 @@ import Image, { StaticImageData } from "next/image";
 import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useFormContext, useWatch } from "react-hook-form";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
-import "react-toastify/dist/ReactToastify.css";
 
 export function ImageDragAndDropZone() {
   const { setValue, getValues } = useFormContext();
@@ -39,7 +38,6 @@ export function ImageDragAndDropZone() {
 
   return (
     <>
-      <ToastContainer />
       <div
         {...getRootProps()}
         className={

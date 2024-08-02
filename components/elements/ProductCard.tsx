@@ -3,16 +3,10 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Modal from "react-modal";
-import { z } from "zod";
 
 import { ProductCardProps } from "@/types/ProductCardProps";
 import { ImageComponent } from "./ImageComponent";
 import { OverViewDescription } from "./OverViewDescription";
-import { DetailImage } from "./DetailImage";
-import { DetailProductName } from "./DetailProductName";
-import { DetailOverView } from "./DetailOverView";
-import { DetailMainTechnology } from "./DetailMainTechnology";
-import { DetailProductLink } from "./DetailProductLink";
 import { ImageDragAndDropZone } from "./ImageDragAndDropZone";
 import { InputDeployUrl } from "./InputDeployUrl";
 import { InputProductName } from "./InputProductName";
@@ -21,8 +15,8 @@ import { InputMainTechnology } from "./InputMainTechnology";
 import { InputProductLink } from "./InputProductLink";
 import { FormProvider, useForm } from "react-hook-form";
 import { modalStyle } from "@/styles/modalStyle";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { inputValidationSchema } from "@/utils/lib/validationRules";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 Modal.setAppElement(".App");
 
@@ -40,6 +34,8 @@ export function ProductCard({
   productLinks
 }: ProductCardProps) {
   const [modalIsOpen, setIsOpen] = useState(false);
+  const router = useRouter();
+
   const methods = useForm({
     // resolver: zodResolver(inputValidationSchema),
     defaultValues: {
@@ -58,8 +54,7 @@ export function ProductCard({
   const onSubmit = async (data: any) => {  
     const formData = new FormData();
 
-    console.log(data);
-
+    console.log("aaa");
 
     formData.append("id", id.toString());
     formData.append("r2uuid", r2uuid);
@@ -71,10 +66,20 @@ export function ProductCard({
     formData.append("subTechnology", data.subTechnology ? data.subTechnology : "");
     formData.append("productLinks", data.productLinks);
 
+    
     const response = await fetch("/api/products", {
       method: "PUT",
       body: formData
     })
+
+    if(response.ok) {
+      toast.info("正常にアップデートできました！", {
+        theme: "colored",
+        autoClose: 2000
+      })
+    }
+
+    router.refresh();
   } 
 
   return (

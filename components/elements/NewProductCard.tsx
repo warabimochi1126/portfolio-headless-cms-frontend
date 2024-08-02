@@ -15,9 +15,13 @@ import fileIcon from "@/public/fileIcon.svg";
 import Image from "next/image";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { inputValidationSchema } from "@/utils/lib/validationRules";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 export function NewProductCard() {
   const [modalIsOpen, setIsOpen] = useState(false);
+  const router = useRouter();
+
   const methods = useForm({
     // resolver: zodResolver(inputValidationSchema),
     defaultValues: {
@@ -46,6 +50,15 @@ export function NewProductCard() {
       method: "POST",
       body: formData
     });
+
+    if(response.ok) {
+      toast.info("正常に追加できました！", {
+        theme: "colored",
+        autoClose: 2000
+      })
+    }
+
+    router.refresh();
   };
 
   return (

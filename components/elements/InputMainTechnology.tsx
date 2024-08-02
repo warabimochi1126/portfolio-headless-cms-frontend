@@ -7,8 +7,6 @@ export function InputMainTechnology() {
     formState: { errors },
   } = useFormContext();
 
-  console.log(errors);
-
   return (
     <div className="space-y-1">
       <label htmlFor="technology" className="font-bold text-xl required">

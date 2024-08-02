@@ -26,7 +26,7 @@ export default async function Home() {
   })
   const productsData: productData[] = await response.json();
 
-  console.log(productsData);
+  // console.log(productsData);
 
   return (
     <>

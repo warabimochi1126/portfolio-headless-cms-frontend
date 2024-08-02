@@ -41,7 +41,7 @@ export function ProductCard({
 }: ProductCardProps) {
   const [modalIsOpen, setIsOpen] = useState(false);
   const methods = useForm({
-    // resolver: zodResolver(inputValidationSchema),
+    resolver: zodResolver(inputValidationSchema),
     defaultValues: {
       id,
       r2uuid,

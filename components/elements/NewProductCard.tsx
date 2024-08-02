@@ -19,7 +19,7 @@ import { inputValidationSchema } from "@/utils/lib/validationRules";
 export function NewProductCard() {
   const [modalIsOpen, setIsOpen] = useState(false);
   const methods = useForm({
-    // resolver: zodResolver(inputValidationSchema),
+    resolver: zodResolver(inputValidationSchema),
     defaultValues: {
       imageSrcPath: "",
       imageFileData: "",

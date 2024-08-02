@@ -19,7 +19,7 @@ import { inputValidationSchema } from "@/utils/lib/validationRules";
 export function NewProductCard() {
   const [modalIsOpen, setIsOpen] = useState(false);
   const methods = useForm({
-    resolver: zodResolver(inputValidationSchema),
+    // resolver: zodResolver(inputValidationSchema),
     defaultValues: {
       imageSrcPath: "",
       imageFileData: "",
@@ -33,8 +33,6 @@ export function NewProductCard() {
   });
 
   const onSubmit = async (data: any) => {
-    console.log(data);
-
     const formData = new FormData();
     formData.append("imageFIleData", data.imageFileData);
     formData.append("deployUrl", data.deployUrl);

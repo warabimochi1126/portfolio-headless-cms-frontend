@@ -5,6 +5,8 @@ export async function POST(req: Request, res: Response) {
     const formData = await req.formData();
     const imageFileData = formData.get("imageFIleData") as File;
 
+    // console.log(imageFileData.charAt(1));
+    console.log(Boolean(imageFileData));
     let imageSrcPath = "";
     if (imageFileData) {
         const imageFileDataArrayBuffer = await imageFileData.arrayBuffer();

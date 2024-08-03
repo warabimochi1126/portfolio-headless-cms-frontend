@@ -16,11 +16,18 @@ import Image from "next/image";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { inputValidationSchema } from "@/utils/lib/validationRules";
 import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { resolve } from "path";
+
+const sleep = (millSec: number) => {
+  return new Promise(resolve => setTimeout(resolve, millSec));
+}
 
 export function NewProductCard() {
   const [modalIsOpen, setIsOpen] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
+  console.log(pathname);
 
   const methods = useForm({
     // resolver: zodResolver(inputValidationSchema),
@@ -55,10 +62,19 @@ export function NewProductCard() {
       toast.info("正常に追加できました！", {
         theme: "colored",
         autoClose: 2000
-      })
+      });
+      
+      await sleep(2000);
+    } else {
+      toast.error("正常に追加できませんでした", {
+        theme: "colored",
+        autoClose: 2000
+      });
+
+      await sleep(2000);
     }
 
-    router.refresh();
+    window.location.reload();
   };
 
   return (

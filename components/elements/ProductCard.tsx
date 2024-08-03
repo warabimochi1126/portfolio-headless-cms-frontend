@@ -20,6 +20,10 @@ import { toast } from "react-toastify";
 
 Modal.setAppElement(".App");
 
+const sleep = (millSec: number) => {
+  return new Promise(resolve => setTimeout(resolve, millSec));
+}
+
 export function ProductCard({
   id,
   r2uuid,
@@ -47,14 +51,12 @@ export function ProductCard({
       overview: overViewStrArray.toString(),
       mainTechnology: mainTechStrArray.toString(),
       subTechnology: subTechStrArray?.toString(),
-      productLinks: productLinks?.toString(),
+      productLinks: productLinks,
     },
   });
 
   const onSubmit = async (data: any) => {  
     const formData = new FormData();
-
-    console.log("aaa");
 
     formData.append("id", id.toString());
     formData.append("r2uuid", r2uuid);
@@ -76,7 +78,16 @@ export function ProductCard({
       toast.info("正常にアップデートできました！", {
         theme: "colored",
         autoClose: 2000
-      })
+      });
+
+      await sleep(2000);
+    } else {
+      toast.error("正常にアップデートできませんでした", {
+        theme: "colored",
+        autoClose: 2000
+      });
+
+      await sleep(2000);
     }
 
     router.refresh();

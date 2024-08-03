@@ -19,7 +19,7 @@ export function InputOverView() {
       <InputField
         type="text"
         id="overview"
-        placeholder="カンマで区切ると改行して表示されます。"
+        placeholder="カンマで区切ると改行して表示され、一つ目はカードの作品名の下に描画されます。 例)個人開発,.envをGitHubリポジトリに結び付けて共有・保存できるWebアプリケーションです。,個人開発です。"
         registerName="overview"
       />
     </div>

@@ -1,13 +1,7 @@
-import { DetailImageIcon } from "@/components/elements/DetailImageIcon";
-import DetailReactIcon from "@/components/elements/DetailReactIcon";
 import { NewProductCard } from "@/components/elements/NewProductCard";
 import { ProductCard } from "@/components/elements/ProductCard";
 import { ProductsHeader } from "@/components/elements/ProductsHeader";
 import { ProductsHeaderStr } from "@/components/layouts/ProductsHeaderStr";
-import EnvHubImage from "@/public/envhub.png";
-import QiitaIcon from "@/public/qiita-icon.png";
-import Image from "next/image";
-import { FaGithubSquare } from "react-icons/fa";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -27,8 +21,6 @@ export default async function Home() {
     cache: "no-store"
   })
   const productsData: productData[] = await response.json();
-
-  // console.log(productsData);
 
   return (
     <>

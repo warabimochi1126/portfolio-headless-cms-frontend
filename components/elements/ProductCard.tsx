@@ -90,7 +90,7 @@ export function ProductCard({
       await sleep(2000);
     }
 
-    router.refresh();
+    window.location.reload();
   } 
 
   return (

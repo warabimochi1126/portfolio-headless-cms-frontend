@@ -27,7 +27,6 @@ export function NewProductCard() {
   const [modalIsOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
-  console.log(pathname);
 
   const methods = useForm({
     // resolver: zodResolver(inputValidationSchema),

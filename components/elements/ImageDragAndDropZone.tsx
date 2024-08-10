@@ -19,7 +19,6 @@ export function ImageDragAndDropZone() {
     }
 
     const droppedImage = files[0];
-    console.log(droppedImage);
 
     // RHF側で一元管理する
     // 本来はサーバ側に処理を投げて、画像保存 + パスをDBに保存

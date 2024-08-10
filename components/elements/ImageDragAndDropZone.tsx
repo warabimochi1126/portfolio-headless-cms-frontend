@@ -1,8 +1,7 @@
 "use client";
-import Image, { StaticImageData } from "next/image";
-import { useState } from "react";
+import Image from "next/image";
 import { useDropzone } from "react-dropzone";
-import { useFormContext, useWatch } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import { toast } from "react-toastify";
 
 
@@ -24,6 +23,7 @@ export function ImageDragAndDropZone() {
     // 本来はサーバ側に処理を投げて、画像保存 + パスをDBに保存
     const imageUrl = URL.createObjectURL(droppedImage);
     setValue("imageSrcPath", imageUrl);
+    console.log(droppedImage);
     setValue("imageFileData", droppedImage);
   };
 

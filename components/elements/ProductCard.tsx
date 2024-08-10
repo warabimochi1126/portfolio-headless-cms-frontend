@@ -59,7 +59,7 @@ export function ProductCard({
     formData.append("id", id.toString());
     formData.append("r2uuid", r2uuid);
     formData.append("imageFileData", data.imageFileData ? data.imageFileData : "");
-    formData.append("deployUrl", data.deployUrl ? data.imageFIleData : "");
+    formData.append("deployUrl", data.deployUrl ? data.deployUrl : "");
     formData.append("productName", data.productName);
     formData.append("overview", data.overview);
     formData.append("mainTechnology", data.mainTechnology);

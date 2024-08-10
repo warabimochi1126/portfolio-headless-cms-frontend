@@ -65,7 +65,7 @@ export async function PUT(req: Request, res: Response) {
 
     const id = Number(formData.get("id"));
     let r2uuid = formData.get("r2uuid") as string;
-    const imageFileData = formData.get("imageFIleData") as File;
+    const imageFileData = formData.get("imageFileData") as File;
     const deployUrl = formData.get("deployUrl")?.toString().trim();
     const productName = formData.get("productName")?.toString().trim();
     const overview = formData.get("overview")?.toString().trim();

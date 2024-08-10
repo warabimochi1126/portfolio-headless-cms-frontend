@@ -15,7 +15,6 @@ import { InputMainTechnology } from "./InputMainTechnology";
 import { InputProductLink } from "./InputProductLink";
 import { FormProvider, useForm } from "react-hook-form";
 import { modalStyle } from "@/styles/modalStyle";
-import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
 Modal.setAppElement(".App");
@@ -38,7 +37,6 @@ export function ProductCard({
   productLinks
 }: ProductCardProps) {
   const [modalIsOpen, setIsOpen] = useState(false);
-  const router = useRouter();
 
   const methods = useForm({
     // resolver: zodResolver(inputValidationSchema),
@@ -60,7 +58,7 @@ export function ProductCard({
 
     formData.append("id", id.toString());
     formData.append("r2uuid", r2uuid);
-    formData.append("imageFIleData", data.imageFileData ? data.imageFIleData : "");
+    formData.append("imageFileData", data.imageFileData ? data.imageFileData : "");
     formData.append("deployUrl", data.deployUrl ? data.imageFIleData : "");
     formData.append("productName", data.productName);
     formData.append("overview", data.overview);
